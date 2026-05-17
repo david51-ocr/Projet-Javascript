@@ -186,3 +186,30 @@ footer nav ul {
 	margin: 2em
 }
 
+/* css ajouter*/
+ .filtres{
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 30px;
+}
+
+.categorie{
+	height: 37px;
+	width: auto;
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: white;
+	color: #1D6154;
+	font-family: Syne;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.active{
+	display: block;
+	color: white;
+	background-color: #1D6154;
+}
