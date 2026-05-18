@@ -1,4 +1,3 @@
-
 /*récup api*/
 async function recupererProjet() {
     const reponses = await fetch("http://localhost:5678/api/works");
@@ -52,21 +51,47 @@ async function afficherFiltres() {
         button.classList.add("categorie");
         button.innerText = categorie.name;
         filtres.appendChild(button);
-        const buttonFiltres = document.querySelectorAll(".categorie");
-
-
-        buttonFiltres.forEach(button => {
-            button.addEventListener("click", () => {
-                buttonFiltres.forEach(btn => {
-                    btn.classList.remove("active");
-                })
-                button.classList.add("active");
-
-            });
-        });
-
+     
     });
-
+    /*classe unique a chaque button*/
+   const buttonAll = document.querySelectorAll("button");
+        const classes = ["btnTous", "btnObjet", "btnAppt", "btnH&R"];
+    buttonAll.forEach((button, i) => {
+    button.classList.add(classes[i]);
+});
 }
 
 afficherFiltres();
+/*filtres clique*/
+async function activeFiltres() {
+    
+const categories = await recupererCategories();
+const buttonFiltres = document.querySelectorAll(".categorie");
+
+
+buttonFiltres.forEach(button => {
+    button.addEventListener("click", () => {
+        buttonFiltres.forEach(btn => {
+            btn.classList.remove("active");
+        })
+        button.classList.add("active");
+
+    });
+});
+}
+
+activeFiltres();
+
+
+async function recupererFiltres (){
+    const projets = await recupererProjet();
+    const btnObjet = document.querySelector(".btnObjet");
+    btnObjet.addEventListener("click", function (){
+        const btnObjetFiltrer = projets.filter(function(projet){
+            return projet.category.name === "Objets"
+        });
+         console.log(btnObjetFiltrer);
+    });
+};
+
+recupererFiltres();
