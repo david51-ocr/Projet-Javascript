@@ -51,47 +51,71 @@ async function afficherFiltres() {
         button.classList.add("categorie");
         button.innerText = categorie.name;
         filtres.appendChild(button);
-     
+
     });
     /*classe unique a chaque button*/
-   const buttonAll = document.querySelectorAll("button");
-        const classes = ["btnTous", "btnObjet", "btnAppt", "btnH&R"];
+    const buttonAll = document.querySelectorAll("button");
+    const classes = ["btnTous", "btnObjet", "btnAppt", "btnHR"];
     buttonAll.forEach((button, i) => {
-    button.classList.add(classes[i]);
-});
+        button.classList.add(classes[i]);
+    });
 }
 
 afficherFiltres();
 /*filtres clique*/
 async function activeFiltres() {
-    
-const categories = await recupererCategories();
-const buttonFiltres = document.querySelectorAll(".categorie");
+
+    const categories = await recupererCategories();
+    const buttonFiltres = document.querySelectorAll(".categorie");
 
 
-buttonFiltres.forEach(button => {
-    button.addEventListener("click", () => {
-        buttonFiltres.forEach(btn => {
-            btn.classList.remove("active");
-        })
-        button.classList.add("active");
+    buttonFiltres.forEach(button => {
+        button.addEventListener("click", () => {
+            buttonFiltres.forEach(btn => {
+                btn.classList.remove("active");
+            })
+            button.classList.add("active");
 
+        });
     });
-});
 }
 
 activeFiltres();
 
 
-async function recupererFiltres (){
+async function recupererFiltres() {
     const projets = await recupererProjet();
+    const btnTous = document.querySelector(".btnTous");
     const btnObjet = document.querySelector(".btnObjet");
-    btnObjet.addEventListener("click", function (){
-        const btnObjetFiltrer = projets.filter(function(projet){
+    const btnAppt = document.querySelector(".btnAppt");
+    const btnHR = document.querySelector(".btnHR");
+    btnTous.addEventListener("click", function () {
+        const btnTousFiltrer = projets.filter(function (projet) {
+            return true;
+        })
+        console.log(btnTousFiltrer);
+    });
+
+    btnObjet.addEventListener("click", function () {
+        const btnObjetFiltrer = projets.filter(function (projet) {
             return projet.category.name === "Objets"
         });
-         console.log(btnObjetFiltrer);
+        console.log(btnObjetFiltrer);
+    });
+     btnAppt.addEventListener("click", function () {
+        const btnApptFiltrer = projets.filter(function (projet) {
+            return projet.category.name === "Appartements"
+        });
+        console.log(btnApptFiltrer);
+    });
+     btnHR.addEventListener("click", function () {
+        const btnHRFiltrer = projets.filter(function (projet) {
+            return projet.category.name === "Hotels & restaurants"
+        });
+        console.log(btnHRFiltrer);
     });
 };
+
+
 
 recupererFiltres();
