@@ -9,9 +9,8 @@ async function recupererProjet() {
 
 /*insertion projet*/
 
-async function imgProjet() {
-
-    const projets = await recupererProjet();
+async function imgProjet(projet) {
+    const projets= await recupererProjet();
     let gallery = document.querySelector(".gallery");
 
     projets.forEach(projet => {
@@ -28,7 +27,7 @@ async function imgProjet() {
     });
 }
 
-imgProjet();
+
 
 /*filtres projet*/
 async function recupererCategories() {
@@ -61,7 +60,7 @@ async function afficherFiltres() {
     });
 }
 
-afficherFiltres();
+
 /*filtres clique*/
 async function activeFiltres() {
 
@@ -80,7 +79,6 @@ async function activeFiltres() {
     });
 }
 
-activeFiltres();
 
 
 async function recupererFiltres() {
@@ -89,33 +87,52 @@ async function recupererFiltres() {
     const btnObjet = document.querySelector(".btnObjet");
     const btnAppt = document.querySelector(".btnAppt");
     const btnHR = document.querySelector(".btnHR");
+    const nomCategories = projets.map(categorie=>categorie.category.name);
     btnTous.addEventListener("click", function () {
         const btnTousFiltrer = projets.filter(function (projet) {
             return true;
         })
-        console.log(btnTousFiltrer);
+         document.querySelector(".gallery").innerHTML="";
+        imgProjet(btnTousFiltrer);
+
     });
 
     btnObjet.addEventListener("click", function () {
         const btnObjetFiltrer = projets.filter(function (projet) {
             return projet.category.name === "Objets"
         });
-        console.log(btnObjetFiltrer);
+        document.querySelector(".gallery").innerHTML="";
+        imgProjet(btnObjetFiltrer);
     });
      btnAppt.addEventListener("click", function () {
         const btnApptFiltrer = projets.filter(function (projet) {
             return projet.category.name === "Appartements"
         });
-        console.log(btnApptFiltrer);
+         document.querySelector(".gallery").innerHTML="";
+        imgProjet(btnApptFiltrer);
     });
      btnHR.addEventListener("click", function () {
         const btnHRFiltrer = projets.filter(function (projet) {
             return projet.category.name === "Hotels & restaurants"
         });
-        console.log(btnHRFiltrer);
+         document.querySelector(".gallery").innerHTML="";
+        imgProjet(btnHRFiltrer);
     });
 };
 
 
+    
 
-recupererFiltres();
+async function init() {
+    const projets = await recupererProjet();
+
+    imgProjet(projets);
+
+    await afficherFiltres();
+
+    activeFiltres();
+
+    recupererFiltres();
+}
+
+init();
