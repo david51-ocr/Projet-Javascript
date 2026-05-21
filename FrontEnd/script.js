@@ -9,8 +9,7 @@ async function recupererProjet() {
 
 /*insertion projet*/
 
-async function imgProjet(projet) {
-    const projets= await recupererProjet();
+async function imgProjet(projets) {
     let gallery = document.querySelector(".gallery");
 
     projets.forEach(projet => {
