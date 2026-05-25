@@ -47,7 +47,7 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
+body .mainContainer {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
@@ -214,3 +214,16 @@ footer nav ul {
 	background-color: #1D6154;
 }
 
+.modeEdition {
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 59px;
+}
+
+.cacher{
+	display: none;
+}

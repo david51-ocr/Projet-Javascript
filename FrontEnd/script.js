@@ -119,8 +119,28 @@ async function recupererFiltres() {
     });
 };
 
+/*login and logout*/
+const token = localStorage.getItem("token");
+const logout = document.querySelector(".logout");
+const login = document.querySelector (".login");
 
-    
+login.addEventListener ("click", function(){
+    window.location.href = "login.html"
+})
+logout.addEventListener("click", function(){
+    localStorage.removeItem("token");
+    window.location.reload();
+})
+
+if(token){
+    document.querySelector(".modeEdition").classList.remove("cacher");
+    login.classList.add("cacher");
+}else{
+    document.querySelector(".modeEdition").classList.add("cacher");
+    logout.classList.add("cacher");
+};
+
+
 
 async function init() {
     const projets = await recupererProjet();
