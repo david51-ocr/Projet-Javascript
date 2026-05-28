@@ -140,7 +140,40 @@ if(token){
     logout.classList.add("cacher");
 };
 
+function gestionModale(fenetre){
+const modale = document.querySelector(".modale");
+modale.classList.add("cacher");
+const galerieModale = document.querySelector(".galerieModale");
+const ouvrirModale = document.querySelector(".ouvrirModale");
+const fermeModale = document.querySelector(".fermerModale");
 
+fenetre.forEach(modales => {
+      const figure = document.createElement("figure");
+      figure.classList.add("photoModale");
+const image = document.createElement("img");
+const btnSupprimer = document.createElement ("button");
+        btnSupprimer.classList.add("btnSupprimer");
+        image.src = modales.imageUrl;
+        image.alt = modales.title;
+        figure.appendChild(image);
+        figure.appendChild(btnSupprimer);
+        galerieModale.appendChild(figure);
+
+        const poubelle = document.createElement ("i");
+        poubelle.classList.add("fa-solid", "fa-trash-can");
+        btnSupprimer.appendChild(poubelle);
+
+    });
+ouvrirModale.addEventListener("click", function(){
+    modale.classList.remove("cacher");
+});
+fermeModale.addEventListener("click", function(){
+    modale.classList.add("cacher");
+});
+console.log(modale);
+console.log(ouvrirModale);
+console.log(fermeModale);
+};
 
 async function init() {
     const projets = await recupererProjet();
@@ -152,6 +185,14 @@ async function init() {
     activeFiltres();
 
     recupererFiltres();
+
+    gestionModale(projets);
 }
 
 init();
+
+
+
+// modale//
+
+

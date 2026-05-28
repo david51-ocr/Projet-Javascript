@@ -222,43 +222,170 @@ footer nav ul {
     justify-content: center;
     align-items: center;
     height: 59px;
-}
-
-.cacher{
-	display: none;
+	gap: 8px;
 }
 
 
-.modale{
-	position: fixed;
 
-    top: 0;
+
+.modale {
+    position: fixed;
+
+    top: 59px;
     left: 0;
-	margin: 0;
-    width: 100%;
-    height: 100%;
 
-    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: calc(100% - 59px);
+
+    background-color: rgba(0, 0, 0, 0.5);
 
     display: flex;
-
     justify-content: center;
     align-items: center;
 }
 
-.contenuModale{
-	background-color: white;
-	width: 630px;
-	height: 688px;
-	border-radius: 10px;
+/* fenêtre blanche */
+.contenuModale {
+    background-color: white;
+
+    width: 600px;
+
+    border-radius: 10px;
+
+    padding: 40px;
+
+    position: relative;
 }
 
-.contenuModale h2{
-	font-family: Work Sans;
-font-weight: 400;
-font-size: 26px;
-text-align: center;
-color: black;
-margin-top: 30px;
-margin-bottom: 30px;
+/* bouton fermer */
+.fermerModale {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    cursor: pointer;
+
+    font-size: 20px;
+}
+
+/* titre */
+.contenuModale h2 {
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+/* galerie */
+.galerieModale {
+ 
+    display: grid;
+
+    grid-template-columns: repeat(5, 78px);
+
+    gap: 10px;
+
+    justify-content: center;
+
+    margin-bottom: 40px;
+}
+
+
+/* figures */
+.galerieModale figure {
+    width: 78px;
+	margin: 0;
+}
+
+
+
+/* bouton ajouter */
+.btnAjouter {
+    display: block;
+
+    margin: auto;
+
+    border: none;
+
+    background-color: #1D6154;
+
+    color: white;
+
+    border-radius: 60px;
+
+    padding: 12px 50px;
+
+    cursor: pointer;
+}
+
+.titre-projets {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 25px;
+}
+
+.titre-projets h2 {
+    margin: 0;
+}
+
+.ouvrirModale {
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    color: black;
+	
+    position: relative;
+    bottom: 5px;
+}
+
+
+.photoModale {
+    position: relative;
+    width: 78px;
+}
+
+.photoModale img {
+    width: 100%;
+    height: 105px;
+    object-fit: cover;
+    display: block;
+	margin-bottom: 20px;
+}
+
+.btnSupprimer {
+    position: absolute;
+
+    top: 4px;
+    right: 4px;
+
+    width: 17px;
+    height: 17px;
+
+    border: none;
+    border-radius: 2px;
+
+    background-color: black;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+
+    cursor: pointer;
+}
+
+.btnSupprimer i {
+    font-size: 10px;
+}
+.cacher{
+	display: none;
 }
