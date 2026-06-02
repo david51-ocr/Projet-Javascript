@@ -81,6 +81,7 @@ async function activeFiltres() {
 
 
 async function recupererFiltres() {
+    const projets = await recupererProjet();
     const btnTous = document.querySelector(".btnTous");
     const btnObjet = document.querySelector(".btnObjet");
     const btnAppt = document.querySelector(".btnAppt");
@@ -195,15 +196,15 @@ function gestionModale(fenetre) {
     });
     const btnProjet = document.querySelector(".btnAjouter");
     btnProjet.addEventListener("click", function () {
-        nouveauProjet(fenetre);
-        chargerCategories();
+        creationFormulaire(fenetre);
+       
     });
 };
 
 
 
 //* ajout nouveau projet*//
-function nouveauProjet(fenetre) {
+function creationFormulaire(fenetre) {
     const ajoutProjet = document.querySelector(".contenuModale");
     ajoutProjet.innerHTML = `
         <button class="retour">
@@ -227,6 +228,8 @@ function nouveauProjet(fenetre) {
             <hr>
             <button type="submit" class="btnValider"> Valider</button>
         </form>  `;
+
+        chargerCategories();
     const btnRetour = document.querySelector(".retour");
     btnRetour.addEventListener("click", function () {
         ajoutProjet.innerHTML = `
@@ -239,12 +242,53 @@ function nouveauProjet(fenetre) {
         <div class="galerieModale"></div>
 
         <button class="btnAjouter">Ajouter une photo</button>
-    `;
+    `; 
+    gestionModale(fenetre);
+});
+       
+        const formulaire = document.getElementById("formAjoutPhoto");
+    formulaire.addEventListener ("submit", async function (event) {
+        event.preventDefault();
+console.log ("submit");
+        const image = document.getElementById ("image").files[0];
+        const titre = document.getElementById ("titre").value;
+        const categorie = document.getElementById ("categorie").value;
 
-        gestionModale(fenetre);
 
+        const formData = new FormData();
+    formData.append("image", image);
+    formData.append("title", titre);
+    formData.append("category", categorie);
+console.log(image);
+console.log(document.getElementById("image").files);
+    const reponse = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        body: formData
     });
-};
+    const projets = await recupererProjet();
+
+    document.querySelector(".gallery").innerHTML = "";
+
+    imgProjet(projets);
+    console.log(reponse.status);
+    });
+    };
+async function chargerCategories() {
+    const categories = await recupererCategories();
+    const choixCategorie = document.getElementById("categorie");
+
+    categories.forEach(categorie => {
+        const option = document.createElement("option");
+        option.value = categorie.id;
+        option.textContent = categorie.name;
+        choixCategorie.appendChild(option);
+    });
+    };
+
+
 
 async function chargerCategories() {
     const categories = await recupererCategories();
