@@ -231,11 +231,11 @@ footer nav ul {
 .modale {
     position: fixed;
 
-    top: 59px;
+    top: 0;
     left: 0;
 
     width: 100%;
-    height: calc(100% - 59px);
+    height: 100%;
 
     background-color: rgba(0, 0, 0, 0.5);
 
@@ -417,7 +417,7 @@ footer nav ul {
     margin-bottom: 30px;
 }
 
-.ajout-image i {
+.ajout-image  i {
     font-size: 60px;
     color: #B9C5CC;
     display: block;
@@ -496,4 +496,24 @@ footer nav ul {
     background: none;
     font-size: 22px;
     cursor: pointer;
+}
+
+#previewImage {
+    width: 130px;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+}
+
+.erreurProjet{
+	
+    color: red;
+    margin-top: 15px;
+
+}
+
+.formulaireValider{
+	color :#1D6154;
+	margin-top: 15px;
 }

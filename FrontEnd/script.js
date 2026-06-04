@@ -214,20 +214,34 @@ function creationFormulaire(fenetre) {
 <div class="ajout-image">
                 <i class="fa-regular fa-image "></i>
 
-                <label for="image" class="btnImage">
+                <label for="image" class="btnImage" >
                     + Ajouter photo
                 </label>
 
-                <input type="file"id="image"name="image"accept="image/png, image/jpeg" hidden>
+                <input type="file"id="image"name="image"accept="image/png, image/jpeg" hidden >
+                <img id="previewImage" class="cacher">
             <p>jpg, png : 4 Mo max</p>
             </div>
             <label for="titre">Titre</label>
             <input  type="text"  id="titre" name="title">
             <label for="categorie">Catégorie</label>
             <select id="categorie" name="category"></select>
+            <p class= "erreurProjet "></p>
+            <p class= "formulaireValider "></p>
             <hr>
             <button type="submit" class="btnValider"> Valider</button>
         </form>  `;
+/*preview image*/
+    const inputImage = document.getElementById("image");
+    const previewImage = document.getElementById("previewImage");
+    inputImage.addEventListener("change", function(){
+        const fichier = inputImage.files[0];
+
+        if (fichier){
+            previewImage.src = URL.createObjectURL(fichier);
+            previewImage.classList.remove("cacher");
+        }
+    })
 
         chargerCategories();
     const btnRetour = document.querySelector(".retour");
@@ -261,13 +275,21 @@ console.log ("submit");
     formData.append("category", categorie);
 console.log(image);
 console.log(document.getElementById("image").files);
-    const reponse = await fetch("http://localhost:5678/api/works", {
+    const post = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`
         },
         body: formData
     });
+    const reponse = await post.json();
+    if (post.ok){
+        document.querySelector(".formulaireValider").innerText="Votre projet est ajouté";
+        document.querySelector(".erreurProjet").innerText = "";
+    }else{
+        document.querySelector (".erreurProjet").innerText = "Image ou titre non renseigné";
+         document.querySelector(".formulaireValider").innerText = "";
+    };
     const projets = await recupererProjet();
 
     document.querySelector(".gallery").innerHTML = "";
