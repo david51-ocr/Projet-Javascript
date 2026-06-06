@@ -38,7 +38,7 @@ function gestionModale(fenetre) {
             }
         })
     });
-    if(!token){
+    if (!token) {
         ouvrirModale.classList.add("cacher");
     };
     ouvrirModale.addEventListener("click", function () {
@@ -57,7 +57,7 @@ function gestionModale(fenetre) {
 
 
 //* ajout nouveau projet*//
- function creationFormulaire(fenetre) {
+function creationFormulaire(fenetre) {
     const ajoutProjet = document.querySelector(".contenuModale");
     ajoutProjet.innerHTML = `
         <button class="retour">
@@ -86,7 +86,7 @@ function gestionModale(fenetre) {
             <hr>
             <button type="submit" class="btnValider"> Valider</button>
         </form>  `;
-        const btnRetour = document.querySelector(".retour");
+    const btnRetour = document.querySelector(".retour");
     btnRetour.addEventListener("click", async function () {
         ajoutProjet.innerHTML = `
         <button class="fermerModale">
@@ -99,7 +99,7 @@ function gestionModale(fenetre) {
         <hr>
         <button class="btnAjouter">Ajouter une photo</button>
     `;
-      const projets = await recupererProjet();
+        const projets = await recupererProjet();
         gestionModale(projets);
     });
     /*preview image*/
@@ -115,16 +115,12 @@ function gestionModale(fenetre) {
     })
 
     chargerCategories();
-    
-
     const formulaire = document.getElementById("formAjoutPhoto");
     formulaire.addEventListener("submit", async function (event) {
         event.preventDefault();
         const image = document.getElementById("image").files[0];
         const titre = document.getElementById("titre").value;
         const categorie = document.getElementById("categorie").value;
-
-
         const formData = new FormData();
         formData.append("image", image);
         formData.append("title", titre);
@@ -154,7 +150,7 @@ function gestionModale(fenetre) {
 async function chargerCategories() {
     const categories = await recupererCategories();
     const choixCategorie = document.getElementById("categorie");
- 
+
     categories.forEach(categorie => {
         const option = document.createElement("option");
         option.value = categorie.id;

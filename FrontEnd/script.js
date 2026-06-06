@@ -27,7 +27,6 @@ async function imgProjet(projets) {
 }
 
 
-
 /*filtres projet*/
 async function recupererCategories() {
     const reponses = await fetch("http://localhost:5678/api/categories");
@@ -171,6 +170,3 @@ async function init() {
 
 init();
 
-
-
-// modale//
