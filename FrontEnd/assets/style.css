@@ -334,9 +334,7 @@ hr{
 .btnSupprimer i {
     font-size: 10px;
 }
-.cacher{
-	display: none;
-}
+
 .contenuModale h2 {
     text-align: center;
     font-size: 26px;
@@ -430,6 +428,9 @@ hr{
     display: block;
     margin: auto;
 }
+#previewImage:not([src]), #previewImage[src=""] {
+    display: none;
+}
 #categorie {
     background-color: white;
 }
@@ -440,4 +441,7 @@ hr{
 .formulaireValider{
 	color :#1D6154;
 	margin-top: 15px;
+}
+.cacher{
+	display: none;
 }

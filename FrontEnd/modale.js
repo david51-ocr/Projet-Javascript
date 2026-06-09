@@ -47,6 +47,14 @@ function gestionModale(fenetre) {
     fermeModale.addEventListener("click", function () {
         modale.classList.add("cacher");
     });
+    modale.addEventListener("click", function () {
+        modale.classList.add("cacher");
+    });
+    const contenuModale = document.querySelector(".contenuModale");
+
+    contenuModale.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
     const btnProjet = document.querySelector(".btnAjouter");
     btnProjet.addEventListener("click", function () {
         creationFormulaire(fenetre);
@@ -110,8 +118,9 @@ function creationFormulaire(fenetre) {
 
         if (fichier) {
             previewImage.src = URL.createObjectURL(fichier);
-            previewImage.classList.remove("cacher");
+
         }
+
     })
 
     chargerCategories();
@@ -136,6 +145,8 @@ function creationFormulaire(fenetre) {
         if (post.ok) {
             document.querySelector(".formulaireValider").innerText = "Votre projet est ajouté";
             document.querySelector(".erreurProjet").innerText = "";
+            formulaire.reset();
+            previewImage.src = "";
         } else {
             document.querySelector(".erreurProjet").innerText = "Image ou titre non renseigné";
             document.querySelector(".formulaireValider").innerText = "";
@@ -147,18 +158,6 @@ function creationFormulaire(fenetre) {
         imgProjet(projets);
     });
 };
-async function chargerCategories() {
-    const categories = await recupererCategories();
-    const choixCategorie = document.getElementById("categorie");
-
-    categories.forEach(categorie => {
-        const option = document.createElement("option");
-        option.value = categorie.id;
-        option.textContent = categorie.name;
-        choixCategorie.appendChild(option);
-    });
-};
-
 async function chargerCategories() {
     const categories = await recupererCategories();
     const choixCategorie = document.getElementById("categorie");
